@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "F360.Presentation.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50417;http://localhost:50418"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: f360-mongodb
+    ports:
+      - "27017:27017"
+
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    container_name: f360-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
