@@ -1,7 +1,7 @@
 using F360.Domain.Dtos.Messages;
 using F360.Domain.Enums;
 using F360.Domain.Interfaces.Database.Repositories;
-using F360.Infrastructure.HttpClients;
+using F360.Domain.Interfaces.HttpClients;
 using MassTransit;
 
 namespace F360.Workers.JobConsumer.Consumers;
@@ -9,7 +9,7 @@ namespace F360.Workers.JobConsumer.Consumers;
 public class JobMessageConsumer(
     ILogger<JobMessageConsumer> logger,
     IJobRepository jobRepository,
-    ViaCepClient viaCepClient) : IConsumer<JobMessage>
+    IViaCepClient viaCepClient) : IConsumer<JobMessage>
 {
     public async Task Consume(ConsumeContext<JobMessage> context)
     {
@@ -35,7 +35,7 @@ public class JobMessageConsumer(
             job.Status = JobStatus.Processing;
             await jobRepository.UpdateAsync(job, context.CancellationToken);
 
-            var viaCepResponse = await viaCepClient.GetAddressAsync(message.Cep) 
+            var viaCepResponse = await viaCepClient.GetAddressAsync(message.Cep, context.CancellationToken) 
                 ?? throw new Exception("Failed to get address from ViaCEP");
 
             logger.LogInformation(

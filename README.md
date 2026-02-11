@@ -153,3 +153,4 @@ curl --location 'http://localhost:50418/health'
 - Projeto F360.Workers.JobConsumer, com deploy separado em 2 versões, cada um consumindo uma fila de prioridade
 - Projeto F360.Workers.OutboxWorker, com configuração de quantas mensagens processar
 - Retrys nos consumers antes de jogar a mensagem na DLQ
+- Enviar CorrelationId na publicação das mensagens do consumer
